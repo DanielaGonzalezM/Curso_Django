@@ -1,8 +1,10 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Portada{% endblock %}
 
-{% block content %}
+{% block background %}{% load static %}{% static 'core/img/home-bg.jpg' %}{% endblock %}
+
+{% block headers %}
 <h1>Daniela G.M.</h1>
 <span class="subheading">Ing. Informática</span>
 {% endblock %}
