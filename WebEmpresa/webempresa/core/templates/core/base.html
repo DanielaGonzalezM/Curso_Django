@@ -113,7 +113,7 @@
               >
             </li>
             <li
-              class="nav-item {% if request.path == '/blog/' %}active{% endif %} px-lg-4"
+              class="nav-item {% if request.path|slice:":6" == '/blog/' %}active{% endif %} px-lg-4"
             >
               <a
                 class="nav-link text-uppercase text-expanded"
