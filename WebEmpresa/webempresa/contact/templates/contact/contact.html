@@ -17,7 +17,16 @@
               <span class="section-heading-lower">Contacto</span>
             </h2>
             <!-- Formulario de contacto -->
-            <table> {{form.as_table}}</table>
+            {% if "ok" in request.GET %}
+              <p><b>Su mensaje ha sido enviado correctamente.</b></p>
+            {% endif %}
+            <form action="" method="POST">
+            {% csrf_token %}
+              <table>
+                {{form.as_table}}
+              </table>
+              <input type="submit" value="Enviar"/>
+            </form>
 
            <!--  <form>
                 <div class="form-group">
