@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import ContactForm
+from django.core.mail import EmailMessage
 
 # Create your views here.
+
+
 def contact(request):
     contact_form = ContactForm()
     if request.method == "POST":
@@ -11,6 +14,21 @@ def contact(request):
             name = request.POST.get("name", "")
             email = request.POST.get("email", "")
             content = request.POST.get("content", "")
-            # Suponemos que todo está ok, redireccionamos
-            return redirect(reverse("contact") + "?ok")
+            # Enviamos el correo y redireccionamos
+            email = EmailMessage(
+                "La Caffettiera: Nuevo mensaje de contacto",
+                "De {} <{}>\n\nEscribió:\n\n{}".format(name, email, content),
+                "no-contestar@inbox.mailtrap.io",
+                ["django@hektorprofe.net"],
+                reply_to=[email],
+            )
+
+            # Lo enviamos y redireccionamos
+            try:
+                email.send()
+                return redirect(reverse("contact") + "?ok")
+            except:
+                # Algo no ha ido bien, redireccionamos a FAIL
+                return redirect(reverse("contact") + "?fail")
+
     return render(request, "contact/contact.html", {"form": contact_form})

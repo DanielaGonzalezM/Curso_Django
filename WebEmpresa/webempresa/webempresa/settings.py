@@ -140,3 +140,9 @@ CKEDITOR_CONFIGS = {
         "removePlugins": "stylesheetparser",
     }
 }
+
+# Email config
+EMAIL_HOST = "smtp.mailtrap.io"
+EMAIL_HOST_USER = "e15b227a5f8221"
+EMAIL_HOST_PASSWORD = "0a34e431e11014"
+EMAIL_PORT = "2525"
