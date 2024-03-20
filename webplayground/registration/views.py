@@ -1,7 +1,5 @@
 from django.db.models.base import Model as Model
-from django.db.models.query import QuerySet
-from .forms import UserCreationFormWithEmail
-from django.forms.models import BaseModelForm
+from .forms import UserCreationFormWithEmail, ProfileForm
 from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
@@ -20,7 +18,7 @@ class SinUpView(CreateView):
     def get_success_url(self) -> str:
         return reverse_lazy("login") + "?register"
 
-    def get_form(self, form_class: type[BaseModelForm] | None = ...) -> BaseModelForm:
+    def get_form(self, form_class: None):
         form = super(SinUpView, self).get_form()
         # Modificar en tiempo real
         form.fields["username"].widget = forms.TextInput(
@@ -40,8 +38,7 @@ class SinUpView(CreateView):
 
 @method_decorator(login_required, name="dispatch")
 class ProfileUpdate(UpdateView):
-    model = Profile
-    fields = ["avatar", "bio", "link"]
+    form_class = ProfileForm
     success_url = reverse_lazy("profile")
     template_name = "registration/profile_form.html"
 
