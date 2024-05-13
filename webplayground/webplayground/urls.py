@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from profiles.urls import profiles_patterns
+from messenger.url import messenger_patterns
 
 urlpatterns = [
     path("", include("core.urls")),
@@ -27,6 +28,8 @@ urlpatterns = [
     path("accounts/", include("registration.urls")),
     # Paths de profiles
     path("profiles/", include(profiles_patterns)),
+    # Paths de messenger
+    path("messenger/", include(messenger_patterns)),
 ]
 
 if settings.DEBUG:
